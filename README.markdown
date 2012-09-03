@@ -34,9 +34,9 @@ Installation
 ### Download and make executable; e.g.,
 
     # download
-    wget http://github.com/lathanh/s3nukem/raw/master/s3nukem
+    wget https://raw.github.com/lathanh/s3nukem/master/s3nukem
     # or
-    curl -O http://github.com/lathanh/s3nukem/raw/master/s3nukem
+    curl -O https://raw.github.com/lathanh/s3nukem/master/s3nukem
 
     # make executable
     chmod 755 s3nukem
