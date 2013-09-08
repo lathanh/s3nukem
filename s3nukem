@@ -25,6 +25,7 @@ end
 
 access_key = nil
 secret_key = nil
+empty_only = false
 thread_count = 10
 max_queue = 10 * 1000
 STDOUT.sync = true
@@ -45,6 +46,10 @@ begin
           '--secret SECRET',
           String,
           'Amazon Secret Key (required)') {|key| secret_key = key}
+  opts.on('-e',
+          '--empty',
+          FalseClass,
+          'If set, we just empty the bucket but dont delete it') {|val| empty_only = true}
   opts.on('-t',
           '--threads COUNT',
           Integer,
@@ -150,7 +155,12 @@ buckets.each do |bucket|
     end
   end
 
-  # Clean up any stragglers and kill the bucket
-  puts "Bucket #{bucket} deleted!" if mains3.force_delete_bucket(bucket)
-  puts
+  if empty_only == false
+    # Clean up any stragglers and kill the bucket
+    puts "Bucket #{bucket} deleted!" if mains3.force_delete_bucket(bucket)
+    puts
+  else
+    puts "-e flag specified, bucket not deleted but should now be empty."
+    puts
+  end
 end
